@@ -1,6 +1,6 @@
 # 2 Dice Baseball
 
-A simple baseball game similar to dice basebaell where you roll two dice and it determines the outcome per out in an inning of baseball.
+A simple baseball game similar to dice baseball where you roll two dice and it determines the outcome per out in an inning of baseball.
 
 ## Authors
 
