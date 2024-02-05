@@ -504,7 +504,8 @@ console.log("Current Date:", getTheDate());
   document.querySelector("#hErrors").textContent = hError;
 }
 
-function removeCells() {
+//May implement this later currently not working correctly
+/*function removeCells() {
   var table = document.getElementById("baseballTable");
 
   // Loop through rows
@@ -519,4 +520,4 @@ function removeCells() {
       }
     //extraInning--;
   }
-}
+}*/
