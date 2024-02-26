@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Page Title</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="">
+<style>
+   .scoretable {
+    background-color: #f8f9fa;
+    color: #202122;
+    margin: 1em 0;
+    border: 1px solid #a2a9b1;
+    border-collapse: collapse;
+}
+.scoretable > * > tr > td {
+    border: 1px solid #a2a9b1;
+    padding: 0.2em 0.4em;
+}
+.scoretable > * > tr > th {
+    background-color: #eaecf0;
+    text-align: center;
+}
+
+.scoretable > tr > th,.scoretable > tr > td,.scoretable > * > tr > th,.scoretable > * > tr > td {
+    border: 1px solid #a2a9b1;
+    padding: 0.2em 0.4em;
+}
+
+</style>
+<script src="scripts/BaseBall.js"></script>
+<body>
+
+<div id="scoreboard">
+    <table id="baseballTable" class="scoretable" style="text-align:center;">
+        <caption id="theDate" style="font-size:90%"></caption>
+        <tbody><tr>
+        <th style="border-right-width:2px; width:170px;">Team</th>
+        <th id="theInning" style="width:25px;">1</th>
+        <th style="width:25px;">2</th>
+        <th style="width:25px;">3</th>
+        <th style="width:25px;">4</th>
+        <th style="width:25px;">5</th>
+        <th style="width:25px;">6</th>
+        <th style="width:25px;">7</th>
+        <th style="width:25px;">8</th>
+        <th style="width:25px;">9</th>
+        <th style="width:25px;border-left-width: 2px;">R</th>
+        <th style="width:25px;">H</th>
+        <th style="width:25px;">E
+        </tr>
+        <tr>
+        <td id="visitingTeam" style="border-right-width:2px; text-align:left; color: black">Visitor</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td id="vRuns" style="border-left-width:2px;font-weight:bold; color:black">0</td>
+        <td id ="vHits" style="font-weight:bold;">0</td>
+        <td id = "vErrors" style="font-weight:bold;">0
+        </td></tr>
+        <tr>
+        <td id="homeTeam" style="border-right-width:2px; text-align:left;">Home</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td id="hRuns" style="border-left-width:2px;font-weight:bold;">0</td>
+        <td id="hHits" style="font-weight:bold;">0</td>
+        <td id="hErrors" style="font-weight:bold;">0
+        </td></tr></tbody></table>
+</div>
+<script>
+    
+
+//playBall();
+
+
+</script>
+<button onclick="playNewGame()">Play New Game</button>
+</body>
+</html>
