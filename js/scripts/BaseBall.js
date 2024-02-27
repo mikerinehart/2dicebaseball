@@ -227,10 +227,9 @@ function playBall() {
   while (curInning <= 9 || (curInning >= 9 && hScore === vScore)) {
     console.log(`INNING ${curInning}`);
     //If Score is tied at the end of 9 keep adding an inning until vScore > hScore or hScore > vScore
-    //May add this back in the future
-    //if (curInning > 9 && hScore === vScore) {
-      //addExtraInning(); 
-    //}
+    if (curInning > 9 && hScore === vScore) {
+      addExtraInning(); 
+    }
     curInning++;
     playInning();
   }
@@ -437,8 +436,7 @@ function playInning() {
 
 //initially score board is set for 9 innings plus 3 boxes for runs, hits, errors
 //this adds the extra inning boxes after the 9th inning box and before the runs, hits, errors boxes
-//may add this back in at some point
-/*function addExtraInning() {
+function addExtraInning() {
   extraInning++;
   const baseballTable = document.getElementById("baseballTable");
   const inningsRow = baseballTable.rows[0];
@@ -466,7 +464,7 @@ function playInning() {
 
   const homeInningCell = document.createElement("td");
   homeRow.insertBefore(homeInningCell, homeRow.cells[homeRow.cells.length - 3]);
-}*/
+}
 
 function getTheDate(){
   // Create a new Date object representing the current date and time
