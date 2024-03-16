@@ -22,14 +22,13 @@ var runners = "0,0,0";
 const visitingTeam = "Visitor";
 const homeTeam = "Home";
 
-
-window.onload = function(){
-  theScoreBoard = document.querySelector('#scoreboard').innerHTML;
-}
+window.onload = function () {
+  theScoreBoard = document.querySelector("#scoreboard").innerHTML;
+};
 
 //Eventually make this player names and positions for home and visitor via DB
-const positionArray = [
-  "Pitcher",
+const visitingTeamArray = [
+  /*"Pitcher",
   "Catcher",
   "First Base",
   "Second Base",
@@ -38,34 +37,247 @@ const positionArray = [
   "Left Field",
   "Center Field",
   "Right Field",
+*/
+  {
+    position: "Pitcher",
+    playerName: "",
+    ab: 0,
+    k: 0,
+    bb: 0,
+    hits: 0,
+    runs: 0,
+    rbis: 0,
+    hr: 0,
+  },
+  {
+    position: "Catcher",
+    playerName: "",
+    ab: 0,
+    k: 0,
+    bb: 0,
+    hits: 0,
+    runs: 0,
+    rbis: 0,
+    hr: 0,
+  },
+  {
+    position: "First Base",
+    playerName: "",
+    ab: 0,
+    k: 0,
+    bb: 0,
+    hits: 0,
+    runs: 0,
+    rbis: 0,
+    hr: 0,
+  },
+  {
+    position: "Second Base",
+    playerName: "",
+    ab: 0,
+    k: 0,
+    bb: 0,
+    hits: 0,
+    runs: 0,
+    rbis: 0,
+    hr: 0,
+  },
+  {
+    position: "Third Base",
+    playerName: "",
+    ab: 0,
+    k: 0,
+    bb: 0,
+    hits: 0,
+    runs: 0,
+    rbis: 0,
+    hr: 0,
+  },
+  {
+    position: "ShortStop",
+    playerName: "",
+    ab: 0,
+    k: 0,
+    bb: 0,
+    hits: 0,
+    runs: 0,
+    rbis: 0,
+    hr: 0,
+  },
+  {
+    position: "Left Field",
+    playerName: "",
+    ab: 0,
+    k: 0,
+    bb: 0,
+    hits: 0,
+    runs: 0,
+    rbis: 0,
+    hr: 0,
+  },
+  {
+    position: "Center Field",
+    playerName: "",
+    ab: 0,
+    k: 0,
+    bb: 0,
+    hits: 0,
+    runs: 0,
+    rbis: 0,
+    hr: 0,
+  },
+  {
+    position: "Right Field",
+    playerName: "",
+    ab: 0,
+    k: 0,
+    bb: 0,
+    hits: 0,
+    runs: 0,
+    rbis: 0,
+    hr: 0,
+  },
 ];
 
-function playNewGame(){
-  document.querySelector('#scoreboard').innerHTML = theScoreBoard;
-outs = 0;
-curInning = 1;
-vAtBat = true;
-vOrder = 0;
-hOrder = 0;
-vScore = 0;
-hScore = 0;
-theBase = 0;
-isOut = false;
-vInningScore = 0;
-hInningScore = 0;
-vHits = 0;
-hHits = 0;
-vError = 0;
-hError = 0;
-extraInning = 0;
+const homeTeamArray = [
+  /*"Pitcher",
+  "Catcher",
+  "First Base",
+  "Second Base",
+  "Third Base",
+  "Shortstop",
+  "Left Field",
+  "Center Field",
+  "Right Field",
+*/
+  {
+    position: "Pitcher",
+    playerName: "",
+    ab: 0,
+    k: 0,
+    bb: 0,
+    hits: 0,
+    runs: 0,
+    rbis: 0,
+    hr: 0,
+  },
+  {
+    position: "Catcher",
+    playerName: "",
+    ab: 0,
+    k: 0,
+    bb: 0,
+    hits: 0,
+    runs: 0,
+    rbis: 0,
+    hr: 0,
+  },
+  {
+    position: "First Base",
+    playerName: "",
+    ab: 0,
+    k: 0,
+    bb: 0,
+    hits: 0,
+    runs: 0,
+    rbis: 0,
+    hr: 0,
+  },
+  {
+    position: "Second Base",
+    playerName: "",
+    ab: 0,
+    k: 0,
+    bb: 0,
+    hits: 0,
+    runs: 0,
+    rbis: 0,
+    hr: 0,
+  },
+  {
+    position: "Third Base",
+    playerName: "",
+    ab: 0,
+    k: 0,
+    bb: 0,
+    hits: 0,
+    runs: 0,
+    rbis: 0,
+    hr: 0,
+  },
+  {
+    position: "ShortStop",
+    playerName: "",
+    ab: 0,
+    k: 0,
+    bb: 0,
+    hits: 0,
+    runs: 0,
+    rbis: 0,
+    hr: 0,
+  },
+  {
+    position: "Left Field",
+    playerName: "",
+    ab: 0,
+    k: 0,
+    bb: 0,
+    hits: 0,
+    runs: 0,
+    rbis: 0,
+    hr: 0,
+  },
+  {
+    position: "Center Field",
+    playerName: "",
+    ab: 0,
+    k: 0,
+    bb: 0,
+    hits: 0,
+    runs: 0,
+    rbis: 0,
+    hr: 0,
+  },
+  {
+    position: "Right Field",
+    playerName: "",
+    ab: 0,
+    k: 0,
+    bb: 0,
+    hits: 0,
+    runs: 0,
+    rbis: 0,
+    hr: 0,
+  },
+];
 
-vBatter = [];
-hBatter = [];
-runners = "0,0,0";
+function playNewGame() {
+  document.querySelector("#scoreboard").innerHTML = theScoreBoard;
+  outs = 0;
+  curInning = 1;
+  vAtBat = true;
+  vOrder = 0;
+  hOrder = 0;
+  vScore = 0;
+  hScore = 0;
+  theBase = 0;
+  isOut = false;
+  vInningScore = 0;
+  hInningScore = 0;
+  vHits = 0;
+  hHits = 0;
+  vError = 0;
+  hError = 0;
+  extraInning = 0;
+
+  vBatter = [];
+  hBatter = [];
+  runners = "0,0,0";
   playBall();
 }
 
-function randomizeLineup(lineup) {//Fisher-Yates algorithm
+function randomizeLineup(lineup) {
+  //Fisher-Yates algorithm
   for (let i = lineup.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [lineup[i], lineup[j]] = [lineup[j], lineup[i]];
@@ -74,11 +286,11 @@ function randomizeLineup(lineup) {//Fisher-Yates algorithm
 }
 //Create home and away lineups by randomizing positionArray
 function createLineup() {
-  const tmpArray1 = [...positionArray];
-  const tmpArray2 = [...positionArray];
+  const vtArray = [...visitingTeamArray];
+  const htArray = [...homeTeamArray];
 
-  vBatter = randomizeLineup(tmpArray1);
-  hBatter = randomizeLineup(tmpArray2);
+  vBatter = randomizeLineup(vtArray);
+  hBatter = randomizeLineup(htArray);
 
   console.log(vBatter);
   console.log(`=====================`);
@@ -86,7 +298,7 @@ function createLineup() {
 }
 
 function pitch() {
-  //Rolls 2D6 and returns result 
+  //Rolls 2D6 and returns result
   const outcomes = {
     "1/1": () => {
       theBase = 4;
@@ -228,7 +440,7 @@ function playBall() {
     console.log(`INNING ${curInning}`);
     //If Score is tied at the end of 9 keep adding an inning until vScore > hScore or hScore > vScore
     if (curInning > 9 && hScore === vScore) {
-      addExtraInning(); 
+      addExtraInning();
     }
     curInning++;
     playInning();
@@ -248,7 +460,6 @@ function scoreRuns(score) {
     console.log(hInningScore);
   }
   console.log(`${score} Run${score > 1 ? "s" : ""} Scored`);
-  
 }
 
 function recordHits() {
@@ -384,7 +595,8 @@ function runBases() {
 }
 
 function playInning() {
-  if (vAtBat) {//VIsitor at bat
+  if (vAtBat) {
+    //VIsitor at bat
     while (outs != 3) {
       console.log(`Pos ${vOrder + 1}: ${vBatter[vOrder]} ${pitch()}`);
 
@@ -393,7 +605,8 @@ function playInning() {
       }
       console.log(runners);
       vOrder++;
-      if (vOrder === vBatter.length) {//go to the top of the batting order
+      if (vOrder === vBatter.length) {
+        //go to the top of the batting order
         vOrder = 0;
       }
     }
@@ -403,12 +616,15 @@ function playInning() {
   outs = 0;
   theBase = 0;
   runners = "0,0,0";
-  document.querySelector(`#visitingTeam ~ td:nth-child(${curInning}`).textContent = vInningScore;
+  document.querySelector(
+    `#visitingTeam ~ td:nth-child(${curInning}`
+  ).textContent = vInningScore;
   console.log(`Inning ${curInning - 1} Score = ${vInningScore}`);
   vInningScore = 0;
   console.log(`${visitingTeam} -- ${vScore}`);
   console.log(`-------------------------`);
-  if (!vAtBat) {//home team at bat
+  if (!vAtBat) {
+    //home team at bat
     while (outs != 3) {
       console.log(`Pos ${hOrder + 1}: ${hBatter[hOrder]} ${pitch()}`);
       if (!isOut) {
@@ -416,13 +632,14 @@ function playInning() {
       }
       console.log(runners);
       hOrder++;
-      if (hOrder === hBatter.length) { //go to the top of the batting order
+      if (hOrder === hBatter.length) {
+        //go to the top of the batting order
         hOrder = 0;
       }
     }
     vAtBat = true;
   }
-//reset for visitor
+  //reset for visitor
   outs = 0;
   theBase = 0;
   runners = "0,0,0";
@@ -466,7 +683,7 @@ function addExtraInning() {
   homeRow.insertBefore(homeInningCell, homeRow.cells[homeRow.cells.length - 3]);
 }
 
-function getTheDate(){
+function getTheDate() {
   // Create a new Date object representing the current date and time
   const currentDate = new Date();
 
@@ -477,21 +694,23 @@ function getTheDate(){
   const hours = currentDate.getHours();
   const minutes = currentDate.getMinutes();
   const seconds = currentDate.getSeconds();
-  
+
   // Display the current date in a specific format
-  const formattedDate = `<strong>${month < 10 ? '0' : ''}${month}/${day < 10 ? '0' : ''}${day}/${year}</strong>`;
+  const formattedDate = `<strong>${month < 10 ? "0" : ""}${month}/${
+    day < 10 ? "0" : ""
+  }${day}/${year}</strong>`;
 
   return formattedDate;
 }
-function endGame(){ //add the final score eventually this will update as the game goes
+function endGame() {
+  //add the final score eventually this will update as the game goes
   console.log(`Visitor Score ==== ${vScore} ==== Home Score ${hScore}`);
   console.log(`Game Over Hits V ${vHits} ====== H ${hHits}`);
   console.log(`Game Over Errors V ${vError} ====== H ${hError}`);
   console.log(`EXtra Innings ===== ${extraInning}`);
 
-
-document.querySelector("#theDate").innerHTML = getTheDate();
-console.log("Current Date:", getTheDate());
+  document.querySelector("#gameDate").innerHTML = getTheDate();
+  console.log("Current Date:", getTheDate());
 
   document.querySelector("#vRuns").textContent = vScore;
   document.querySelector("#vHits").textContent = vHits;
