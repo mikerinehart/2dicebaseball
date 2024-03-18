@@ -15,12 +15,13 @@ let vError = 0;
 let hError = 0;
 let extraInning = 0;
 let theScoreBoard = "";
+let currentPitch = "";
 
 var vBatter = [];
 var hBatter = [];
 var runners = "0,0,0";
-const visitingTeam = "Visitor";
-const homeTeam = "Home";
+const visitingTeam = "Angry Beavers";
+const homeTeam = "O-Town Spitballs";
 
 window.onload = function () {
   theScoreBoard = document.querySelector("#scoreboard").innerHTML;
@@ -28,19 +29,9 @@ window.onload = function () {
 
 //Eventually make this player names and positions for home and visitor via DB
 const visitingTeamArray = [
-  /*"Pitcher",
-  "Catcher",
-  "First Base",
-  "Second Base",
-  "Third Base",
-  "Shortstop",
-  "Left Field",
-  "Center Field",
-  "Right Field",
-*/
   {
     position: "Pitcher",
-    playerName: "",
+    playerName: "Norbert Beaver",
     ab: 0,
     k: 0,
     bb: 0,
@@ -51,7 +42,7 @@ const visitingTeamArray = [
   },
   {
     position: "Catcher",
-    playerName: "",
+    playerName: "Daggett Beaver",
     ab: 0,
     k: 0,
     bb: 0,
@@ -62,7 +53,7 @@ const visitingTeamArray = [
   },
   {
     position: "First Base",
-    playerName: "",
+    playerName: "Barry Bear",
     ab: 0,
     k: 0,
     bb: 0,
@@ -73,7 +64,7 @@ const visitingTeamArray = [
   },
   {
     position: "Second Base",
-    playerName: "",
+    playerName: "Muscualr Beaver",
     ab: 0,
     k: 0,
     bb: 0,
@@ -84,7 +75,7 @@ const visitingTeamArray = [
   },
   {
     position: "Third Base",
-    playerName: "",
+    playerName: "Stump",
     ab: 0,
     k: 0,
     bb: 0,
@@ -95,7 +86,7 @@ const visitingTeamArray = [
   },
   {
     position: "ShortStop",
-    playerName: "",
+    playerName: "Treeflower",
     ab: 0,
     k: 0,
     bb: 0,
@@ -106,7 +97,7 @@ const visitingTeamArray = [
   },
   {
     position: "Left Field",
-    playerName: "",
+    playerName: "Oxnard Montalvo",
     ab: 0,
     k: 0,
     bb: 0,
@@ -117,7 +108,7 @@ const visitingTeamArray = [
   },
   {
     position: "Center Field",
-    playerName: "",
+    playerName: "Slap Johnson",
     ab: 0,
     k: 0,
     bb: 0,
@@ -128,7 +119,7 @@ const visitingTeamArray = [
   },
   {
     position: "Right Field",
-    playerName: "",
+    playerName: "Loogie Hawk",
     ab: 0,
     k: 0,
     bb: 0,
@@ -140,19 +131,9 @@ const visitingTeamArray = [
 ];
 
 const homeTeamArray = [
-  /*"Pitcher",
-  "Catcher",
-  "First Base",
-  "Second Base",
-  "Third Base",
-  "Shortstop",
-  "Left Field",
-  "Center Field",
-  "Right Field",
-*/
   {
     position: "Pitcher",
-    playerName: "",
+    playerName: "Rocko Rama",
     ab: 0,
     k: 0,
     bb: 0,
@@ -163,7 +144,7 @@ const homeTeamArray = [
   },
   {
     position: "Catcher",
-    playerName: "",
+    playerName: "Heffer Wolfe",
     ab: 0,
     k: 0,
     bb: 0,
@@ -174,7 +155,7 @@ const homeTeamArray = [
   },
   {
     position: "First Base",
-    playerName: "",
+    playerName: "Filburt Turtle",
     ab: 0,
     k: 0,
     bb: 0,
@@ -185,7 +166,7 @@ const homeTeamArray = [
   },
   {
     position: "Second Base",
-    playerName: "",
+    playerName: "Spunky",
     ab: 0,
     k: 0,
     bb: 0,
@@ -196,7 +177,7 @@ const homeTeamArray = [
   },
   {
     position: "Third Base",
-    playerName: "",
+    playerName: "Ed Bighead",
     ab: 0,
     k: 0,
     bb: 0,
@@ -207,7 +188,7 @@ const homeTeamArray = [
   },
   {
     position: "ShortStop",
-    playerName: "",
+    playerName: "Bev Bighead",
     ab: 0,
     k: 0,
     bb: 0,
@@ -218,7 +199,7 @@ const homeTeamArray = [
   },
   {
     position: "Left Field",
-    playerName: "",
+    playerName: "Leon Chameleon",
     ab: 0,
     k: 0,
     bb: 0,
@@ -229,7 +210,7 @@ const homeTeamArray = [
   },
   {
     position: "Center Field",
-    playerName: "",
+    playerName: "Dr. Hutchison",
     ab: 0,
     k: 0,
     bb: 0,
@@ -240,7 +221,7 @@ const homeTeamArray = [
   },
   {
     position: "Right Field",
-    playerName: "",
+    playerName: "Really Really Big Man",
     ab: 0,
     k: 0,
     bb: 0,
@@ -304,7 +285,8 @@ function pitch() {
       theBase = 4;
       isOut = false;
       recordHits();
-      return "Home Run";
+      recordHomeRun();
+      return "HomeRun";
     },
     "1/2": () => {
       theBase = 2;
@@ -383,6 +365,7 @@ function pitch() {
     "4/4": () => {
       theBase = 1;
       isOut = false;
+      recordWalk();
       return "Walk";
     },
     "4/5": () => {
@@ -448,24 +431,48 @@ function playBall() {
   endGame();
 }
 
+function scoreRBI(theScore) {
+  if (currentPitch != "BaseOnError" || currentPitch != "Walk") {
+    if (vAtBat) {
+      vBatter[vOrder].rbis += theScore;
+    } else {
+      hBatter[hOrder].rbis += theScore;
+    }
+  }
+}
+
 function scoreRuns(score) {
   //track runs scored
   if (vAtBat) {
     vScore += score;
     vInningScore += score;
+    scoreRBI(score);
     console.log(vInningScore); //runs scored this inning
   } else {
     hScore += score;
     hInningScore += score;
+    scoreRBI(score);
     console.log(hInningScore);
   }
   console.log(`${score} Run${score > 1 ? "s" : ""} Scored`);
 }
 
+function recordHomeRun(){
+  if (vAtBat) {
+    vBatter[vOrder].hr++;
+  } else {
+    hBatter[hOrder].hr++;
+  }
+}
+
 function recordHits() {
   if (vAtBat) {
+    //Individual Batter Hits Totals
+    vBatter[vOrder].hits++;
+    //Team Hits Total
     vHits++;
   } else {
+    hBatter[hOrder].hits++;
     hHits++;
   }
 }
@@ -474,6 +481,13 @@ function recordError() {
     hError++;
   } else {
     vError++;
+  }
+}
+function recordWalk() {
+  if (vAtBat) {
+    vBatter[vOrder].hits++;
+  } else {
+    hBatter[hOrder].bb++;
   }
 }
 //Basic base running implemented so ifa runner is on third and a single or double is hit, the runner stays on third
@@ -503,6 +517,9 @@ function runBases() {
           break;
         case "1,0,1":
           runners = "1,1,1";
+          break;
+        case "0,0,1":
+          runners = "1,0,1";
           break;
       }
       break;
@@ -598,8 +615,16 @@ function playInning() {
   if (vAtBat) {
     //VIsitor at bat
     while (outs != 3) {
-      console.log(`Pos ${vOrder + 1}: ${vBatter[vOrder]} ${pitch()}`);
-
+      vBatter[vOrder].ab++;
+      currentPitch = pitch();
+      console.log(
+        `Pos ${vOrder + 1}: ${vBatter[vOrder].playerName} ${
+          vBatter[vOrder].position
+        } ${currentPitch}`
+      );
+      if(currentPitch === "Strikeout"){
+        vBatter[vOrder].k++;
+      }
       if (!isOut) {
         runBases();
       }
@@ -626,7 +651,16 @@ function playInning() {
   if (!vAtBat) {
     //home team at bat
     while (outs != 3) {
-      console.log(`Pos ${hOrder + 1}: ${hBatter[hOrder]} ${pitch()}`);
+      hBatter[hOrder].ab++;
+      currentPitch = pitch();
+      console.log(
+        `Pos ${hOrder + 1}: ${hBatter[hOrder].position} ${
+          hBatter[hOrder].playerName
+        } ${currentPitch}`
+      );
+      if(currentPitch === "Strikeout"){
+        hBatter[hOrder].k++;
+      }
       if (!isOut) {
         runBases();
       }
@@ -719,6 +753,37 @@ function endGame() {
   document.querySelector("#hRuns").textContent = hScore;
   document.querySelector("#hHits").textContent = hHits;
   document.querySelector("#hErrors").textContent = hError;
+
+  const summaryDiv = document.getElementById("summary");
+  summaryDiv.innerHTML = `<strong>${visitingTeam} Stats</strong>`;
+  vBatter.forEach((player) => {
+    const playerDiv = document.createElement("div");
+    playerDiv.textContent = `${player.playerName}: ${player.position} AB: ${player.ab} K: ${player.k} H: ${player.hits} R: ${player.runs} RBI: ${player.rbis} BB: ${player.bb} HR: ${player.hr}`;
+    summaryDiv.appendChild(playerDiv);
+    player.ab = 0;
+    player.k = 0;
+    player.hits = 0;
+    player.runs = 0;
+    player.rbis = 0;
+    player.bb = 0;
+    player.hr = 0;
+  });
+  summaryDiv.innerHTML += `<br><strong>${homeTeam} Stats</strong>`;
+  hBatter.forEach((player) => {
+    const playerDiv = document.createElement("div");
+    playerDiv.textContent = `${player.playerName}: ${player.position} AB: ${player.ab} K: ${player.k} H: ${player.hits} R: ${player.runs} RBI: ${player.rbis} BB: ${player.bb}  HR: ${player.hr}`;
+    summaryDiv.appendChild(playerDiv);
+    player.ab = 0;
+    player.k = 0;
+    player.hits = 0;
+    player.runs = 0;
+    player.rbis = 0;
+    player.bb = 0;
+    player.hr = 0;
+  });
+
+  console.log(vBatter);
+  console.log(hBatter);
 }
 
 //May implement this later currently not working correctly
