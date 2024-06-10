@@ -31,6 +31,7 @@ window.onload = function () {
 const visitingTeamArray = [
   {
     position: "Pitcher",
+    positionShort: "P",
     playerName: "Norbert Beaver",
     ab: 0,
     k: 0,
@@ -42,6 +43,7 @@ const visitingTeamArray = [
   },
   {
     position: "Catcher",
+    positionShort: "C",
     playerName: "Daggett Beaver",
     ab: 0,
     k: 0,
@@ -53,6 +55,7 @@ const visitingTeamArray = [
   },
   {
     position: "First Base",
+    positionShort: "1B",
     playerName: "Barry Bear",
     ab: 0,
     k: 0,
@@ -64,6 +67,7 @@ const visitingTeamArray = [
   },
   {
     position: "Second Base",
+    positionShort: "2B",
     playerName: "Muscualr Beaver",
     ab: 0,
     k: 0,
@@ -75,6 +79,7 @@ const visitingTeamArray = [
   },
   {
     position: "Third Base",
+    positionShort: "3B",
     playerName: "Stump",
     ab: 0,
     k: 0,
@@ -86,6 +91,7 @@ const visitingTeamArray = [
   },
   {
     position: "ShortStop",
+    positionShort: "SS",
     playerName: "Treeflower",
     ab: 0,
     k: 0,
@@ -97,6 +103,7 @@ const visitingTeamArray = [
   },
   {
     position: "Left Field",
+    positionShort: "LF",
     playerName: "Oxnard Montalvo",
     ab: 0,
     k: 0,
@@ -108,6 +115,7 @@ const visitingTeamArray = [
   },
   {
     position: "Center Field",
+    positionShort: "CF",
     playerName: "Slap Johnson",
     ab: 0,
     k: 0,
@@ -119,6 +127,7 @@ const visitingTeamArray = [
   },
   {
     position: "Right Field",
+    positionShort: "RF",
     playerName: "Loogie Hawk",
     ab: 0,
     k: 0,
@@ -133,6 +142,7 @@ const visitingTeamArray = [
 const homeTeamArray = [
   {
     position: "Pitcher",
+    positionShort: "P",
     playerName: "Rocko Rama",
     ab: 0,
     k: 0,
@@ -144,6 +154,7 @@ const homeTeamArray = [
   },
   {
     position: "Catcher",
+    positionShort: "C",
     playerName: "Heffer Wolfe",
     ab: 0,
     k: 0,
@@ -155,6 +166,7 @@ const homeTeamArray = [
   },
   {
     position: "First Base",
+    positionShort: "1B",
     playerName: "Filburt Turtle",
     ab: 0,
     k: 0,
@@ -166,6 +178,7 @@ const homeTeamArray = [
   },
   {
     position: "Second Base",
+    positionShort: "2B",
     playerName: "Spunky",
     ab: 0,
     k: 0,
@@ -177,6 +190,7 @@ const homeTeamArray = [
   },
   {
     position: "Third Base",
+    positionShort: "3B",
     playerName: "Ed Bighead",
     ab: 0,
     k: 0,
@@ -188,6 +202,7 @@ const homeTeamArray = [
   },
   {
     position: "ShortStop",
+    positionShort: "SS",
     playerName: "Bev Bighead",
     ab: 0,
     k: 0,
@@ -199,6 +214,7 @@ const homeTeamArray = [
   },
   {
     position: "Left Field",
+    positionShort: "LF",
     playerName: "Leon Chameleon",
     ab: 0,
     k: 0,
@@ -210,6 +226,7 @@ const homeTeamArray = [
   },
   {
     position: "Center Field",
+    positionShort: "CF",
     playerName: "Dr. Hutchison",
     ab: 0,
     k: 0,
@@ -221,6 +238,7 @@ const homeTeamArray = [
   },
   {
     position: "Right Field",
+    positionShort: "RF",
     playerName: "Really Really Big Man",
     ab: 0,
     k: 0,
@@ -754,36 +772,67 @@ function endGame() {
   document.querySelector("#hHits").textContent = hHits;
   document.querySelector("#hErrors").textContent = hError;
 
-  const summaryDiv = document.getElementById("summary");
-  summaryDiv.innerHTML = `<strong>${visitingTeam} Stats</strong>`;
-  vBatter.forEach((player) => {
-    const playerDiv = document.createElement("div");
-    playerDiv.textContent = `${player.playerName}: ${player.position} AB: ${player.ab} K: ${player.k} H: ${player.hits} R: ${player.runs} RBI: ${player.rbis} BB: ${player.bb} HR: ${player.hr}`;
-    summaryDiv.appendChild(playerDiv);
-    player.ab = 0;
-    player.k = 0;
-    player.hits = 0;
-    player.runs = 0;
-    player.rbis = 0;
-    player.bb = 0;
-    player.hr = 0;
-  });
-  summaryDiv.innerHTML += `<br><strong>${homeTeam} Stats</strong>`;
-  hBatter.forEach((player) => {
-    const playerDiv = document.createElement("div");
-    playerDiv.textContent = `${player.playerName}: ${player.position} AB: ${player.ab} K: ${player.k} H: ${player.hits} R: ${player.runs} RBI: ${player.rbis} BB: ${player.bb}  HR: ${player.hr}`;
-    summaryDiv.appendChild(playerDiv);
-    player.ab = 0;
-    player.k = 0;
-    player.hits = 0;
-    player.runs = 0;
-    player.rbis = 0;
-    player.bb = 0;
-    player.hr = 0;
-  });
 
-  console.log(vBatter);
-  console.log(hBatter);
+
+let vTable = `<table class="scoretable statTable" style="text-align:center;">
+<tbody>
+<tr>
+<th style="border-right-width:2px; width:170px;">${visitingTeam}</th>
+<th>Pos</th>
+<th>AB</th>
+<th>K</th>
+<th>Hits</th>
+<th>Runs</th>
+<th>RBIs</th>
+<th>BB</th>
+<th>HR</th>
+</tr>`;
+
+vBatter.forEach((player) => {
+  vTable += `<tr><td>${player.playerName}</td><td>${player.positionShort}</td><td>${player.ab}</td><td>${player.k}</td><td>${player.hits}</td><td>${player.runs}</td><td>${player.rbis}</td><td>${player.bb}</td><td>${player.hr}</td></tr>`;
+
+  player.ab = 0;
+  player.k = 0;
+  player.hits = 0;
+  player.runs = 0;
+  player.rbis = 0;
+  player.bb = 0;
+  player.hr = 0;
+});
+
+vTable += '</tbody></table>';
+document.getElementById("visitorStats").innerHTML = vTable;
+
+
+let hTable = `<table class="scoretable statTable" style="text-align:center;">
+<tbody>
+<tr>
+<th style="border-right-width:2px; width:170px;">${homeTeam}</th>
+<th>Pos</th>
+<th>AB</th>
+<th>K</th>
+<th>Hits</th>
+<th>Runs</th>
+<th>RBIs</th>
+<th>BB</th>
+<th>HR</th>
+</tr>`;
+
+hBatter.forEach((player) => {
+  hTable += `<tr><td>${player.playerName}</td><td>${player.positionShort}</td><td>${player.ab}</td><td>${player.k}</td><td>${player.hits}</td><td>${player.runs}</td><td>${player.rbis}</td><td>${player.bb}</td><td>${player.hr}</td></tr>`;
+
+  player.ab = 0;
+  player.k = 0;
+  player.hits = 0;
+  player.runs = 0;
+  player.rbis = 0;
+  player.bb = 0;
+  player.hr = 0;
+});
+
+hTable += '</tbody></table>';
+document.getElementById("homeStats").innerHTML = hTable;
+
 }
 
 //May implement this later currently not working correctly
