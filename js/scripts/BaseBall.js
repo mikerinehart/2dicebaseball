@@ -475,7 +475,7 @@ function scoreRuns(score) {
   console.log(`${score} Run${score > 1 ? "s" : ""} Scored`);
 }
 
-function recordHomeRun(){
+function recordHomeRun() {
   if (vAtBat) {
     vBatter[vOrder].hr++;
   } else {
@@ -640,7 +640,7 @@ function playInning() {
           vBatter[vOrder].position
         } ${currentPitch}`
       );
-      if(currentPitch === "Strikeout"){
+      if (currentPitch === "Strikeout") {
         vBatter[vOrder].k++;
       }
       if (!isOut) {
@@ -676,7 +676,7 @@ function playInning() {
           hBatter[hOrder].playerName
         } ${currentPitch}`
       );
-      if(currentPitch === "Strikeout"){
+      if (currentPitch === "Strikeout") {
         hBatter[hOrder].k++;
       }
       if (!isOut) {
@@ -735,6 +735,52 @@ function addExtraInning() {
   homeRow.insertBefore(homeInningCell, homeRow.cells[homeRow.cells.length - 3]);
 }
 
+
+function updateStats(teamType) {
+  console.log("Called STATS for", teamType);
+  const isVisitor = teamType === "visitor";
+  const playerStats = isVisitor ? vBatter : hBatter;
+  const teamName = isVisitor ? visitingTeam : homeTeam;
+
+  const createStatsRow = (player) => `
+    <tr>
+      <td>${player.playerName}</td>
+      <td>${player.positionShort}</td>
+      <td>${player.ab}</td>
+      <td>${player.k}</td>
+      <td>${player.hits}</td>
+      <td>${player.runs}</td>
+      <td>${player.rbis}</td>
+      <td>${player.bb}</td>
+      <td>${player.hr}</td>
+    </tr>`;
+
+  const statsTable = `
+    <table class="scoretable statTable" style="text-align:center;">
+      <tbody>
+        <tr>
+          <th style="border-right-width:2px; width:170px;">${teamName}</th>
+          <th>Pos</th>
+          <th>AB</th>
+          <th>K</th>
+          <th>Hits</th>
+          <th>Runs</th>
+          <th>RBIs</th>
+          <th>BB</th>
+          <th>HR</th>
+        </tr>
+        ${playerStats.map(createStatsRow).join('')}
+      </tbody>
+    </table>`;
+
+  document.getElementById(`${teamType}Stats`).innerHTML = statsTable;
+
+  // Reset player stats
+  playerStats.forEach(player => {
+    player.ab = player.k = player.hits = player.runs = player.rbis = player.bb = player.hr = 0;
+  });
+}
+
 function getTheDate() {
   // Create a new Date object representing the current date and time
   const currentDate = new Date();
@@ -772,38 +818,10 @@ function endGame() {
   document.querySelector("#hHits").textContent = hHits;
   document.querySelector("#hErrors").textContent = hError;
 
-
-
-let vTable = `<table class="scoretable statTable" style="text-align:center;">
-<tbody>
-<tr>
-<th style="border-right-width:2px; width:170px;">${visitingTeam}</th>
-<th>Pos</th>
-<th>AB</th>
-<th>K</th>
-<th>Hits</th>
-<th>Runs</th>
-<th>RBIs</th>
-<th>BB</th>
-<th>HR</th>
-</tr>`;
-
-vBatter.forEach((player) => {
-  vTable += `<tr><td>${player.playerName}</td><td>${player.positionShort}</td><td>${player.ab}</td><td>${player.k}</td><td>${player.hits}</td><td>${player.runs}</td><td>${player.rbis}</td><td>${player.bb}</td><td>${player.hr}</td></tr>`;
-
-  player.ab = 0;
-  player.k = 0;
-  player.hits = 0;
-  player.runs = 0;
-  player.rbis = 0;
-  player.bb = 0;
-  player.hr = 0;
-});
-
-vTable += '</tbody></table>';
-document.getElementById("visitorStats").innerHTML = vTable;
-
-
+updateStats("visitor");
+updateStats("home");
+}
+/*
 let hTable = `<table class="scoretable statTable" style="text-align:center;">
 <tbody>
 <tr>
@@ -834,6 +852,7 @@ hTable += '</tbody></table>';
 document.getElementById("homeStats").innerHTML = hTable;
 
 }
+*/
 
 //May implement this later currently not working correctly
 /*function removeCells() {
