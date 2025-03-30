@@ -17,9 +17,9 @@ let extraInning = 0;
 let theScoreBoard = "";
 let currentPitch = "";
 
-var vBatter = [];
-var hBatter = [];
-var runners = "0,0,0";
+let vBatter = [];
+let hBatter = [];
+let runners = "0,0,0";
 const visitingTeam = "Angry Beavers";
 const homeTeam = "O-Town Spitballs";
 
@@ -39,7 +39,12 @@ const visitingTeamArray = [
     hits: 0,
     runs: 0,
     rbis: 0,
-    hr: 0,
+    hr:0,
+    singles: 0,
+    doubles: 0,
+    triples: 0,
+    curBase: 0,
+    posID: 1
   },
   {
     position: "Catcher",
@@ -51,7 +56,12 @@ const visitingTeamArray = [
     hits: 0,
     runs: 0,
     rbis: 0,
-    hr: 0,
+    hr:0,
+    singles: 0,
+    doubles: 0,
+    triples: 0,
+    curBase: 0,
+    posID: 2
   },
   {
     position: "First Base",
@@ -63,7 +73,12 @@ const visitingTeamArray = [
     hits: 0,
     runs: 0,
     rbis: 0,
-    hr: 0,
+    hr:0,
+    singles: 0,
+    doubles: 0,
+    triples: 0,
+    curBase: 0,
+    posID: 3
   },
   {
     position: "Second Base",
@@ -75,7 +90,12 @@ const visitingTeamArray = [
     hits: 0,
     runs: 0,
     rbis: 0,
-    hr: 0,
+    hr:0,
+    singles: 0,
+    doubles: 0,
+    triples: 0,
+    curBase: 0,
+    posID: 4
   },
   {
     position: "Third Base",
@@ -87,7 +107,12 @@ const visitingTeamArray = [
     hits: 0,
     runs: 0,
     rbis: 0,
-    hr: 0,
+    hr:0,
+    singles: 0,
+    doubles: 0,
+    triples: 0,
+    curBase: 0,
+    posID: 5
   },
   {
     position: "ShortStop",
@@ -99,7 +124,12 @@ const visitingTeamArray = [
     hits: 0,
     runs: 0,
     rbis: 0,
-    hr: 0,
+    hr:0,
+    singles: 0,
+    doubles: 0,
+    triples: 0,
+    curBase: 0,
+    posID: 6
   },
   {
     position: "Left Field",
@@ -111,7 +141,12 @@ const visitingTeamArray = [
     hits: 0,
     runs: 0,
     rbis: 0,
-    hr: 0,
+    hr:0,
+    singles: 0,
+    doubles: 0,
+    triples: 0,
+    curBase: 0,
+    posID: 7
   },
   {
     position: "Center Field",
@@ -123,7 +158,12 @@ const visitingTeamArray = [
     hits: 0,
     runs: 0,
     rbis: 0,
-    hr: 0,
+    hr:0,
+    singles: 0,
+    doubles: 0,
+    triples: 0,
+    curBase: 0,
+    posID: 8
   },
   {
     position: "Right Field",
@@ -135,7 +175,12 @@ const visitingTeamArray = [
     hits: 0,
     runs: 0,
     rbis: 0,
-    hr: 0,
+    hr:0,
+    singles: 0,
+    doubles: 0,
+    triples: 0,
+    curBase: 0,
+    posID: 9
   },
 ];
 
@@ -150,7 +195,12 @@ const homeTeamArray = [
     hits: 0,
     runs: 0,
     rbis: 0,
-    hr: 0,
+    hr:0,
+    singles: 0,
+    doubles: 0,
+    triples: 0,
+    curBase: 0,
+    posID: 1
   },
   {
     position: "Catcher",
@@ -162,7 +212,12 @@ const homeTeamArray = [
     hits: 0,
     runs: 0,
     rbis: 0,
-    hr: 0,
+    hr:0,
+    singles: 0,
+    doubles: 0,
+    triples: 0,
+    curBase: 0,
+    posID: 2
   },
   {
     position: "First Base",
@@ -174,7 +229,12 @@ const homeTeamArray = [
     hits: 0,
     runs: 0,
     rbis: 0,
-    hr: 0,
+    hr:0,
+    singles: 0,
+    doubles: 0,
+    triples: 0,
+    curBase: 0,
+    posID: 3
   },
   {
     position: "Second Base",
@@ -186,7 +246,12 @@ const homeTeamArray = [
     hits: 0,
     runs: 0,
     rbis: 0,
-    hr: 0,
+    hr:0,
+    singles: 0,
+    doubles: 0,
+    triples: 0,
+    curBase: 0,
+    posID: 4
   },
   {
     position: "Third Base",
@@ -198,7 +263,12 @@ const homeTeamArray = [
     hits: 0,
     runs: 0,
     rbis: 0,
-    hr: 0,
+    hr:0,
+    singles: 0,
+    doubles: 0,
+    triples: 0,
+    curBase: 0,
+    posID: 5
   },
   {
     position: "ShortStop",
@@ -210,7 +280,12 @@ const homeTeamArray = [
     hits: 0,
     runs: 0,
     rbis: 0,
-    hr: 0,
+    hr:0,
+    singles: 0,
+    doubles: 0,
+    triples: 0,
+    curBase: 0,
+    posID: 6
   },
   {
     position: "Left Field",
@@ -222,7 +297,11 @@ const homeTeamArray = [
     hits: 0,
     runs: 0,
     rbis: 0,
-    hr: 0,
+    hr:0, singles: 0,
+    doubles: 0,
+    triples: 0,
+    curBase: 0,
+    posID: 7
   },
   {
     position: "Center Field",
@@ -234,7 +313,12 @@ const homeTeamArray = [
     hits: 0,
     runs: 0,
     rbis: 0,
-    hr: 0,
+    hr:0,
+    singles: 0,
+    doubles: 0,
+    triples: 0,
+    curBase: 0,
+    posID: 8
   },
   {
     position: "Right Field",
@@ -246,7 +330,12 @@ const homeTeamArray = [
     hits: 0,
     runs: 0,
     rbis: 0,
-    hr: 0,
+    hr:0, 
+    singles: 0, 
+    doubles: 0, 
+    triples: 0,
+    curBase: 0,
+    posID: 9
   },
 ];
 
@@ -302,20 +391,20 @@ function pitch() {
     "1/1": () => {
       theBase = 4;
       isOut = false;
-      recordHits();
+     recordHits(theBase);
       recordHomeRun();
       return "HomeRun";
     },
     "1/2": () => {
       theBase = 2;
       isOut = false;
-      recordHits();
+     recordHits(theBase);
       return "Double";
     },
     "1/3": () => {
       theBase = 1;
       isOut = false;
-      recordHits();
+     recordHits(theBase);
       return "Single";
     },
     "1/4": () => {
@@ -336,7 +425,7 @@ function pitch() {
     "2/2": () => {
       theBase = 1;
       isOut = false;
-      recordHits();
+     recordHits(theBase);
       return "Single";
     },
     "2/3": () => {
@@ -362,7 +451,7 @@ function pitch() {
     "3/3": () => {
       theBase = 1;
       isOut = false;
-      recordHits();
+     recordHits(theBase);
       return "Single";
     },
     "3/4": () => {
@@ -405,16 +494,17 @@ function pitch() {
     "5/6": () => {
       theBase = 1;
       isOut = false;
-      recordHits();
+     recordHits(theBase);
       return "Single";
     },
     "6/6": () => {
       theBase = 3;
       isOut = false;
-      recordHits();
+     recordHits(theBase);
       return "Triple";
     },
   };
+  //hit(vBatter[vOrder], currentPitch);
   //for example the 3/4 would also be the same as 4/3 for a two dice roll thus a strikeoout
   for (const key in outcomes) {
     const [dice1, dice2] = key.split("/");
@@ -432,21 +522,6 @@ function pitch() {
 function diceRoll() {
   //Eandom number 1-6
   return Math.floor(Math.random() * 6) + 1;
-}
-
-function playBall() {
-  createLineup();
-  console.log("PLay Ball!");
-  while (curInning <= 9 || (curInning >= 9 && hScore === vScore)) {
-    console.log(`INNING ${curInning}`);
-    //If Score is tied at the end of 9 keep adding an inning until vScore > hScore or hScore > vScore
-    if (curInning > 9 && hScore === vScore) {
-      addExtraInning();
-    }
-    curInning++;
-    playInning();
-  }
-  endGame();
 }
 
 function scoreRBI(theScore) {
@@ -483,15 +558,48 @@ function recordHomeRun() {
   }
 }
 
-function recordHits() {
+function recordHits(hitType) {
   if (vAtBat) {
     //Individual Batter Hits Totals
     vBatter[vOrder].hits++;
     //Team Hits Total
     vHits++;
+    switch (hitType) {
+      case 1:
+        vBatter[vOrder].singles++;
+        break;
+      case 2:
+        vBatter[vOrder].doubles++;
+        break;
+      case 3:
+        vBatter[vOrder].triples++;
+        break;
+      default:
+        console.error("Invalid hit type");
+    }
   } else {
     hBatter[hOrder].hits++;
     hHits++;
+    switch (hitType) {
+      case 1:
+        hBatter[hOrder].singles++;
+        break;
+      case 2:
+        hBatter[hOrder].doubles++;
+        break;
+      case 3:
+        hBatter[hOrder].triples++;
+        break;
+      default:
+        console.error("Invalid hit type");
+    }
+  }
+}
+function recordRun(){
+  if (vAtBat) {
+    vBatter[vOrder].runs++;
+  } else {
+    hBatter[hOrder].runs++;
   }
 }
 function recordError() {
@@ -503,12 +611,67 @@ function recordError() {
 }
 function recordWalk() {
   if (vAtBat) {
-    vBatter[vOrder].hits++;
+    vBatter[vOrder].bb++;
   } else {
     hBatter[hOrder].bb++;
   }
 }
-//Basic base running implemented so ifa runner is on third and a single or double is hit, the runner stays on third
+const baseResults = {
+  1: { // Single outcomes
+    "0,0,0": "1,0,0",
+    "1,0,0": "1,1,0",
+    "1,1,0": "1,1,1",
+    "1,1,1": { runners: "1,1,1", score: 1 },
+    "0,1,0": "1,1,0",
+    "0,1,1": "1,1,1",
+    "0,0,1": "1,0,1",
+    "1,0,1": "1,1,1",
+},
+
+2: { // Double outcomes
+    "0,0,0": "0,1,0",
+    "1,0,0": "0,1,1",
+    "1,1,0": { runners: "0,1,1", score: 1 },
+    "1,1,1": { runners: "0,1,1", score: 2 },
+    "0,1,0": "0,1,1",
+    "0,1,1": { runners: "0,1,1", score: 1 },
+    "0,0,1": "0,1,1",
+    "1,0,1": { runners: "0,1,1", score: 1 },
+},
+
+3: { // Triple outcomes
+    "0,0,0": "0,0,1",
+    "1,0,0": { runners: "0,0,1", score: 1 },
+    "1,1,0": { runners: "0,0,1", score: 2 },
+    "1,1,1": { runners: "0,0,1", score: 3 },
+    "0,1,0": { runners: "0,0,1", score: 1 },
+    "0,1,1": { runners: "0,0,1", score: 2 },
+    "0,0,1": { runners: "0,0,1", score: 1 },
+    "1,0,1": { runners: "0,0,1", score: 2 },
+},
+  4: {
+    "0,0,0": { runners: "0,0,0", score: 1 },
+    "1,0,0": { runners: "0,0,0", score: 2 },
+    "1,1,0": { runners: "0,0,0", score: 3 },
+    "1,1,1": { runners: "0,0,0", score: 4 },
+    "1,0,1": { runners: "0,0,0", score: 3 },
+    "0,1,0": { runners: "0,0,0", score: 2 },
+    "0,1,1": { runners: "0,0,0", score: 3 },
+  },
+};
+
+function runBases() {
+  const result = baseResults[theBase][runners];
+  if (typeof result === "string") {
+    runners = result;
+  } else {
+    runners = result.runners;
+    scoreRuns(result.score);
+  }
+}
+
+//Basic base running implemented so if a runner is on third and a single or double is hit, the runner stays on third
+/*
 function runBases() {
   switch (theBase) {
     //Single
@@ -628,7 +791,7 @@ function runBases() {
       break;
   }
 }
-
+*/
 function playInning() {
   if (vAtBat) {
     //VIsitor at bat
@@ -656,9 +819,7 @@ function playInning() {
     vAtBat = false;
   }
   //reset for home team
-  outs = 0;
-  theBase = 0;
-  runners = "0,0,0";
+  resetOutsBasesRunners();
   document.querySelector(
     `#visitingTeam ~ td:nth-child(${curInning}`
   ).textContent = vInningScore;
@@ -692,9 +853,7 @@ function playInning() {
     vAtBat = true;
   }
   //reset for visitor
-  outs = 0;
-  theBase = 0;
-  runners = "0,0,0";
+  resetOutsBasesRunners();
   document.querySelector(`#homeTeam ~ td:nth-child(${curInning}`).textContent =
     hInningScore;
   console.log(`Inning ${curInning - 1} Score = ${hInningScore}`);
@@ -702,7 +861,11 @@ function playInning() {
   console.log(`${homeTeam} -- ${hScore}`);
   console.log(`-------------------------`);
 }
-
+function resetOutsBasesRunners(){
+  outs = 0;
+  theBase = 0;
+  runners = "0,0,0";
+}
 //initially score board is set for 9 innings plus 3 boxes for runs, hits, errors
 //this adds the extra inning boxes after the 9th inning box and before the runs, hits, errors boxes
 function addExtraInning() {
@@ -753,6 +916,9 @@ function updateStats(teamType) {
       <td>${player.rbis}</td>
       <td>${player.bb}</td>
       <td>${player.hr}</td>
+      <td>${player.singles}</td>
+      <td>${player.doubles}</td>
+      <td>${player.triples}</td>
     </tr>`;
 
   const statsTable = `
@@ -768,6 +934,9 @@ function updateStats(teamType) {
           <th>RBIs</th>
           <th>BB</th>
           <th>HR</th>
+          <th>S</th>
+          <th>D</th>
+          <th>T</th>
         </tr>
         ${playerStats.map(createStatsRow).join('')}
       </tbody>
@@ -777,7 +946,7 @@ function updateStats(teamType) {
 
   // Reset player stats
   playerStats.forEach(player => {
-    player.ab = player.k = player.hits = player.runs = player.rbis = player.bb = player.hr = 0;
+    player.ab = player.k = player.hits = player.runs = player.rbis = player.bb = player.hr = player.singles = player.doubles = player.triples = 0;
   });
 }
 
@@ -800,6 +969,22 @@ function getTheDate() {
 
   return formattedDate;
 }
+
+function playBall() {
+  createLineup();
+  console.log("PLay Ball!");
+  while (curInning <= 9 || (curInning >= 9 && hScore === vScore)) {
+    console.log(`INNING ${curInning}`);
+    //If Score is tied at the end of 9 keep adding an inning until vScore > hScore or hScore > vScore
+    if (curInning > 9 && hScore === vScore) {
+      addExtraInning();
+    }
+    curInning++;
+    playInning();
+  }
+  endGame();
+}
+
 function endGame() {
   //add the final score eventually this will update as the game goes
   console.log(`Visitor Score ==== ${vScore} ==== Home Score ${hScore}`);
@@ -821,53 +1006,3 @@ function endGame() {
 updateStats("visitor");
 updateStats("home");
 }
-/*
-let hTable = `<table class="scoretable statTable" style="text-align:center;">
-<tbody>
-<tr>
-<th style="border-right-width:2px; width:170px;">${homeTeam}</th>
-<th>Pos</th>
-<th>AB</th>
-<th>K</th>
-<th>Hits</th>
-<th>Runs</th>
-<th>RBIs</th>
-<th>BB</th>
-<th>HR</th>
-</tr>`;
-
-hBatter.forEach((player) => {
-  hTable += `<tr><td>${player.playerName}</td><td>${player.positionShort}</td><td>${player.ab}</td><td>${player.k}</td><td>${player.hits}</td><td>${player.runs}</td><td>${player.rbis}</td><td>${player.bb}</td><td>${player.hr}</td></tr>`;
-
-  player.ab = 0;
-  player.k = 0;
-  player.hits = 0;
-  player.runs = 0;
-  player.rbis = 0;
-  player.bb = 0;
-  player.hr = 0;
-});
-
-hTable += '</tbody></table>';
-document.getElementById("homeStats").innerHTML = hTable;
-
-}
-*/
-
-//May implement this later currently not working correctly
-/*function removeCells() {
-  var table = document.getElementById("baseballTable");
-
-  // Loop through rows
-  for (var i = 0; i < table.rows.length; i++) {
-    var row = table.rows[i];
-
-    // Loop through cells in the row
-   for (var j = 0; j <= extraInning; j++) {
-      // Remove the cell at the specified index
-      console.log("REMOVING......"+(extraInning+11));
-      row.deleteCell(extraInning+11);
-      }
-    //extraInning--;
-  }
-}*/
